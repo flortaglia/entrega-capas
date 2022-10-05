@@ -5,6 +5,7 @@ class ProductoController{
     async getProductos(req, res){
         try {
             const verProductos = await DAO.getAll()
+            console.log(verProductos)
             res.render('productos.hbs',{verProductos})
         } catch (error) {
             res.status(error.errorCode).send(error.message);

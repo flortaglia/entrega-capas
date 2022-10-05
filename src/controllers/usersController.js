@@ -5,9 +5,9 @@ const main = require('../nodemailer/mailAdmin.js')
 const getHome = (req,res)=>{
     res.sendFile(path.join(__dirname, ".././public/home.html"));
 }
-// const getHomeAdmin =(req,res)=>{
-//     res.sendFile(path.join(__dirname, ".././public/index.html"));
-// }
+const getHomeAdmin =(req,res)=>{
+    res.sendFile(path.join(__dirname, ".././public/index.html"));
+}
 //LOGIN
 const getLogin =(req, res)=>{
     if(req.isAuthenticated()){
@@ -72,6 +72,7 @@ const getLogout = (req, res, next) => {
 
 module.exports = {
     getHome,
+    getHomeAdmin,
     getLogin,
     getUserInfo,
     postLogin,

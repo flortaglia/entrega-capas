@@ -1,19 +1,23 @@
-const {CarritoDao,ProductoDao} = require ('../daos/index.js') 
+// const {CarritoDao,ProductoDao} = require ('../daos/index.js') 
+const {CarritoDao} = require ('../daos/index.js') 
 const mainSms = require('../twilio/sms.js')
 const mainWhatsapp = require('../twilio/whatsapp.js')
+const ProductoDaoFactory = require ('../classes/ProductoDaoFactory.class.js') 
+const DAO = ProductoDaoFactory.getDao()
 
 const addProductService = async (cantidad,id_prod,username)=>{
    
     let carrito = await CarritoDao.cartByUsername(username)
     if(!carrito) { carrito= await CarritoDao.newCart(username)}
-    const indice = carrito.productos.findIndex( (prod)=> prod._id.toString() === id_prod)
+    carrito.productos.map( (prod)=> console.log('prod.id',prod._id))
+    const indice = carrito.productos.findIndex( (prod)=> prod._id === id_prod)
     console.log(indice)
     if(indice >= 0){
 
         carrito.productos[indice].cantidad += cantidad
     }else{
         console.log('id_prod else',id_prod)
-        let producto = await ProductoDao.getById(id_prod)
+        let producto = await DAO.getById(id_prod)
                 
         console.log('producto',producto)
         carrito.productos.push({
@@ -50,7 +54,7 @@ const deleteProductFromCartService = async (id_prod,username)=>{
     if(!carrito) { 
         throw 'carrito no existe' 
     }
-    carrito.productos = carrito.productos.filter((prod)=>prod._id.toString() !== id_prod)
+    carrito.productos = carrito.productos.filter((prod)=>prod._id !== id_prod)
     carrito = await CarritoDao.update(carrito._id,carrito.productos)
 }
 

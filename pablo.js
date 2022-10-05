@@ -62,3 +62,7 @@ console.log(pablo.name)
 console.log(pablo.getName())
 
 pablo.setName("Fulano")
+
+
+
+    // carrito.productos.map( (prod)=> console.log(//prod._id.toString()))
