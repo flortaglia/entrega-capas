@@ -5,19 +5,28 @@ const {escribir} = require ('./write.js')
 const logger = require('../utils/logger.js')
 const ChatDaoFactory = require ('../classes/ChatDaoFactory.class.js') 
 const DAO = ChatDaoFactory.getDao()
-
+const ProductoDaoFactory = require ('../classes/ProductoDaoFactory.class.js') 
+const ProductoDAO = ProductoDaoFactory.getDao()
 // LADO SERVIDOR
 async function configChatMongo(expressServer){
     const io = new Server(expressServer)
 
     io.on('connection', async socket=>{
         console.log('se conecto un usuario')
-    
-        io.emit('serverSend:Products', productos) //envio todos los productos
+        let chatproductos = await ProductoDAO.getAll()
+        io.emit('serverSend:Products', chatproductos) //envio todos los productos
         try {
-            socket.on('client:enterProduct', productInfo=>{
-                productos.push(productInfo) //recibo productos
-                io.emit('serverSend:Products', productos)//emito productos recibidos a los usuarios
+            socket.on('client:enterProduct', async productInfo=>{
+                // productos.push(productInfo) 
+                //recibo productos
+                try {
+                    await ProductoDAO.create(productInfo)
+                    chatproductos = await ProductoDAO.getAll()
+                    
+                } catch (error) {
+                    console.log(error)
+                }
+                io.emit('serverSend:Products', chatproductos)//emito productos recibidos a los usuarios
             })
         } catch (error) {
             logger.error('problema productos lado server', error)

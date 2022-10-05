@@ -5,7 +5,7 @@ class ProductoController{
     async getProductos(req, res){
         try {
             const verProductos = await DAO.getAll()
-            console.log(verProductos)
+            // console.log(verProductos)
             res.render('productos.hbs',{verProductos})
         } catch (error) {
             res.status(error.errorCode).send(error.message);
@@ -17,7 +17,7 @@ class ProductoController{
         try {
             const {title, description, code, price, thumbnail, stock} = req.body 
             const elemento = await DAO.create(title, description, code, price, thumbnail, stock)
-            console.log('elemento',elemento)
+            // console.log('elemento',elemento)
             res.json(elemento)
         } catch (error) {
             res.status(error.errorCode).send(error.message); 
@@ -30,7 +30,7 @@ class ProductoController{
             const id = req.params.id
             console.log('id', id)
             const elemento = await DAO.getById(id)
-             console.log('elemento', elemento)
+            //  console.log('elemento', elemento)
             if(!elemento){return res.status(404).json({error: "Producto no encontrado"})}
             res.json(elemento)
         } catch (error) {

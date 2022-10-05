@@ -54,10 +54,10 @@ class ProductoDaoMongo extends DAO {
     // }
   
   }
-  async create(title, description, code, price, thumbnail, stock){
+  async create(messageproducto){
     try {
       // await this.db.connect();
-      const producto = new this.collection({title, description, code, price, thumbnail, stock,timestamp:Date.now()})
+      const producto = new this.collection(messageproducto)
       await producto.save() 
       
       return new ProductoDTO(producto)
