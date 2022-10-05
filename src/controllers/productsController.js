@@ -67,7 +67,7 @@ class ProductoController{
     }
 
 }
-export default ProductoController;
+module.exports = ProductoController;
 
 // const getProductos = async (req, res) => {
 //     const verProductos = await ProductoDaoMongo.getAll()

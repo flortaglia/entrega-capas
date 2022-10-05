@@ -10,6 +10,6 @@ const productoSchema = new mongoose.Schema({
   stock:{ type: Number, require: true}
 })
 
-const Productos = model ("productos", productoSchema)
+const Productos = mongoose.model ("productosnuevos", productoSchema)
 
-export default Productos
+module.exports = Productos

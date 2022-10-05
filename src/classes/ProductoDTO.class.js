@@ -10,7 +10,7 @@ class ProductoDTO {
         this.stock = data.stock
     }
 }
-export default ProductoDTO;
+module.exports = ProductoDTO;  
 
 
 // class ProductoDTO {

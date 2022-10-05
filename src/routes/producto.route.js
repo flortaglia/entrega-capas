@@ -8,15 +8,15 @@ class RouterProducto{
     }
 
     start(){
-        router.get('/', getProductos)
+        router.get('/', this.controller.getProductos)
         //parte admin o ej 40
-        router.get('/:id', getProductoId)
-        router.post('/', postProductos)
-        router.put('/:id', putProduct)
-        router.delete('/:id', deleteProduct )
+        router.get('/:id', this.controller.getProductoId)
+        router.post('/', this.controller.postProductos)
+        router.put('/:id', this.controller.putProduct)
+        router.delete('/:id', this.controller.deleteProduct )
 
         return router
     }
 }
 
-export default RouterProducto
+module.exports = RouterProducto

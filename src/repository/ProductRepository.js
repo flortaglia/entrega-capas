@@ -6,4 +6,4 @@ class ProductRepository extends BaseRepository {
   }
 }
 
-export default ProductRepository;
+module.exports = ProductRepository;

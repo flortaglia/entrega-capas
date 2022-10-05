@@ -6,4 +6,4 @@ class ProductoDaoFactory {
   }
 }
 
-export default ProductoDaoFactory;
+module.exports = ProductoDaoFactory;

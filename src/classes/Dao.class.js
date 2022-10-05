@@ -23,4 +23,4 @@ class DAO {
 
 }
 
-export default DAO;
+module.exports = DAO;

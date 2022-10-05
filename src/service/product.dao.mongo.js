@@ -1,4 +1,4 @@
-import ProductoDTO from "../classes/ProductoDTO.class.js";
+const ProductoDTO = require("../classes/ProductoDTO.class.js")  ;
 
 // const {ProductoDao} = require ('../daos/index.js') 
 const CustomError = require ("../classes/CustomError.class.js") ;
@@ -88,7 +88,7 @@ class ProductoDaoMongo extends DAO {
   
 }
 
-export default ProductoDaoMongo;
+module.exports = ProductoDaoMongo;
 
 
 

@@ -30,4 +30,4 @@ class MongoClient extends DBClient {
   }
 }
 
-export default MongoClient;
+module.exports = MongoClient;
