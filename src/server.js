@@ -91,5 +91,5 @@ configChatMongo(expressServer)
 app.use((req,res,next)=>{
   const { url, method } = req;
   logger.warn(`Método ${method} URL ${url} inexistente`);
-  
+  res.sendStatus(404);
 } )
