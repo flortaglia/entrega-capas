@@ -6,7 +6,8 @@ class ProductoController{
         try {
             const verProductos = await DAO.getAll()
             // console.log(verProductos)
-            res.render('productos.hbs',{verProductos})
+            // res.render('productos.hbs',{verProductos})
+            res.json(verProductos)
         } catch (error) {
             res.status(error.errorCode).send(error.message);
         }
@@ -15,11 +16,12 @@ class ProductoController{
     ////////
     async postProductos (req, res) {
         try {
-            const {title, description, code, price, thumbnail, stock} = req.body 
-            const elemento = await DAO.create(title, description, code, price, thumbnail, stock)
+            // const {title, description, code, price, thumbnail, stock} = req.body 
+            const elemento = await DAO.create(req.body )
             // console.log('elemento',elemento)
             res.json(elemento)
         } catch (error) {
+            console.log('error productcontroller',error)
             res.status(error.errorCode).send(error.message); 
         }
     

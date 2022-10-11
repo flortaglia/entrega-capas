@@ -859,3 +859,5 @@
 [2022-10-05T19:45:15.086Z] - warn : Método GET URL /api/%22/img/carne-empa.webp%22 inexistente
 [2022-10-05T19:45:58.553Z] - warn : Método GET URL /favicon.ico inexistente
 [2022-10-05T19:46:00.681Z] - warn : Método GET URL /favicon.ico inexistente
+[2022-10-11T17:35:19.474Z] - warn : Método GET URL /asdasds inexistente
+[2022-10-11T17:37:35.964Z] - warn : Método GET URL /asdasds inexistente
