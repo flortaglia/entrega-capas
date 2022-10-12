@@ -57,7 +57,9 @@ class ProductoDaoMongo extends DAO {
   async create(messageproducto){
     try {
       // await this.db.connect();
+     
       const producto = new this.collection(messageproducto)
+      
       await producto.save() 
       
       return new ProductoDTO(producto)

@@ -10,74 +10,59 @@ describe("Test sobre Productos", () => {
         request = supertest("http://localhost:8080");
     });
 
-    describe("- POST /api/productos", () => {
-        const productToCreate = productGenerate.generateProduct();
-        
-        
-        it("Creamos producto, debería devolver status 201", async () => {
-            response = await request
-                        .post("/api/productos")
-                        .send(productToCreate);
-            id=response.body._id
-            console.log ('id',id)
-            expect(response.status).to.eql(201);
-            expect(response.body.title).to.eql(productToCreate.title);
-            expect(response.body.thumbnail).to.eql(productToCreate.thumbnail);
-            expect(response.body.description).to.eql(productToCreate.description);
-            expect(response.body.price).to.eql(Number(productToCreate.price));
-            expect(response.body.stock).to.eql(Number(productToCreate.stock));
-            expect(response.body.code).to.eql(Number(productToCreate.code));
-        });
+    const productToCreate = productGenerate.generateProduct();
+    
+    it("It creates a product (POST => /api/productos)", async () => {
+        response = await request
+                    .post("/api/productos")
+                    .send(productToCreate);
+        id=response.body._id
+        // console.log ('response.body',response.body)
+        expect(response.status).to.eql(201);
+        expect(response.body.title).to.eql(productToCreate.title);
+        expect(response.body.thumbnail).to.eql(productToCreate.thumbnail);
+        expect(response.body.description).to.eql(productToCreate.description);
+        expect(response.body.price).to.eql(Number(productToCreate.price));
+        expect(response.body.stock).to.eql(Number(productToCreate.stock));
+        expect(response.body.code).to.eql(Number(productToCreate.code));
     });
    
-    describe("- GET /api/productos", () => {
-        it("Deberia devolver status 200", async () => {
-        response = await request
-            .get("/api/productos")
+    it("Return all products - GET => /api/productos", async () => {
+    response = await request
+        .get("/api/productos")
+
+    expect(response.status).to.eql(200);
+    });
+   
+    it("Return status 404 - GET => Unkown Page", async () => {
+    const response = await request.get("/asdasds");
+
+    expect(response.status).to.eql(404);
+    });
+
+    const productToCreate2 = productGenerate.generateProduct()
     
-        expect(response.status).to.eql(200);
-        });
-    });
-
-    describe("- GET Unkown", () => {
-        it("Deberia devolver status 404", async () => {
-        const response = await request.get("/asdasds");
-
-        expect(response.status).to.eql(404);
-        });
-    });
-
-    describe("- GET /api/productos/id", () => {
-        it("Deberia devolver status 200", async () => {
+    it("Modificamos producto - PUT =>/api/productos/id ", async () => {
         response = await request
-            .get(`/api/productos/${id}`)
-            // .set({ productId: "6325e134691a867ef6d0ffd3" }); x header
-
+                    .put(`/api/productos/${id}`)
+                    .send(productToCreate2);
+        // console.log ('response.body PUT',response.body)
         expect(response.status).to.eql(200);
-        
-        expect(response.body).to.keys("_id","title", "description", "code","price", "thumbnail", "stock");
-        });
     });
 
-    describe("- DELETE /api/productos/id", () => {
-        it("Deberia devolver status 200", async () => {
-        response = await request
-            .delete(`/api/productos/${id}`)
-        expect(response.status).to.eql(200);
-        });
+    it("- GET a product by Id => /api/productos/id", async () => {
+    response = await request
+        .get(`/api/productos/${id}`)
+    
+    expect(response.status).to.eql(200);
+    
+    expect(response.body).to.keys("_id","title", "description", "code","price", "thumbnail", "stock");
     });
 
-    describe("- PUT /api/productos/id", () => {
-        const productToCreate = productGenerate.generateProduct();
-        let response
-        
-        it("Creamos producto, debería devolver status 201", async () => {
-            response = await request
-                        .put(`/api/productos/${id}`)
-                        .send(productToCreate);
-
-            expect(response.status).to.eql(201);
-        });
+    it("- DELETE product by Id => /api/productos/id", async () => {
+    response = await request
+        .delete(`/api/productos/${id}`)
+    expect(response.status).to.eql(200);
     });
 
 });

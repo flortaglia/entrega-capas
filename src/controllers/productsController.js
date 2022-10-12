@@ -18,7 +18,6 @@ class ProductoController{
         try {
             // const {title, description, code, price, thumbnail, stock} = req.body 
             const elemento = await DAO.create(req.body )
-            // console.log('elemento',elemento)
             res.status(201).json(elemento)
         } catch (error) {
             console.log('error productcontroller',error)
@@ -48,7 +47,7 @@ class ProductoController{
             const elemento = await DAO.getById(id)
             if(!elemento){return res.status(404).json({error: "Producto no encontrado"})}
             const elementChanged = await DAO.update(id,title, description, code, price, thumbnail, stock)
-            res.json(elementChanged)
+            res.status(200).json(elementChanged)
             
         } catch (error) {
             res.status(error.errorCode).send(error.message); 
