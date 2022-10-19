@@ -899,3 +899,5 @@
 [2022-10-19T16:13:43.372Z] - warn : Método GET URL /k inexistente
 [2022-10-19T16:14:29.473Z] - warn : Método GET URL /k inexistente
 [2022-10-19T16:14:29.475Z] - warn : Método GET URL /www.google.com inexistente
+[2022-10-19T16:25:16.815Z] - warn : Método GET URL /k inexistente
+[2022-10-19T16:25:16.822Z] - warn : Método GET URL /www.google.com inexistente

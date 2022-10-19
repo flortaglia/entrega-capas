@@ -1,50 +1,42 @@
 const crypto = require ("crypto") ;
 const Producto = require ("../graphqlClasses/producto.class.js") ;
+const ProductoDaoFactory = require ('../classes/ProductoDaoFactory.class.js') 
+const DAO = ProductoDaoFactory.getDao()
 
-const productoMap = {};
 
-const createProducto = ({ datos }) => {
-  const id = crypto.randomBytes(10).toString("hex");
-  const newProducto = new Producto(id, datos);
-
-  productoMap[id] = newProducto;
-
+const createProducto = async ({ datos }) => {
+  const newProducto = await DAO.create(datos )
   return newProducto;
 };
 
-const getProducto = ({ id }) => {
-  if (!productoMap[id]) throw new Error("El Producto no existe");
-
-  return productoMap[id];
+const getProducto = async ({ id }) => {
+  const producto = await DAO.getById(id)
+  if(!producto){return res.status(404).json({error: "Producto no encontrado"})}
+  return producto;
 };
 
-const getProductos = ({ campo, valor }) => {
-  const productos = Object.values(productoMap);
-
+const getProductos = async ({ campo, valor }) => {
+  const verProductos = await DAO.getAll()
   if (campo && valor) {
-    return productos.filter((producto) => producto[campo] == valor);
+    return verProductos.filter((producto) => producto[campo] == valor);
   } else {
-    return productos;
+    return verProductos;
   }
 };
 
-const updateProducto = ({ id, datos }) => {
-  if (!productoMap[id]) throw new Error("El Producto no existe");
-
-  const productoUpdated = new Producto(id, datos);
-
-  productoMap[id] = productoUpdated;
-
+const updateProducto = async ({ id, datos }) => {
+  const producto = await DAO.getById(id)
+  if(!producto){return res.status(404).json({error: "Producto no encontrado"})}
+  const {title, description, code, price, thumbnail, stock} = datos
+  const productoUpdated = await DAO.update(id, title, description, code, price, thumbnail, stock)
   return productoUpdated;
 };
 
-const deleteProducto = ({ id }) => {
-  if (!productoMap[id]) throw new Error("El Producto no existe");
-
-  const productoDeleted = productoMap[id];
-
-  delete productoMap[id];
-
+const deleteProducto = async ({ id }) => {
+  const productoDeleted = await DAO.getById(id)
+  if(!productoDeleted){return res.json({ error: "El parámetro no es un número o el id no existe" })}
+  await DAO.deleteById(id)
+  
   return productoDeleted;
 };
 
