@@ -11,8 +11,12 @@ const initPassport = require( './passport/init.js');
 //IMPORTO ROUTERS  CL28
 const routes = require( "./routes/index.js");
 const rutas = require( "./routes/api.js");
+////////////////     GRAPHQL   ///////////////////////////////
+const  { graphqlHTTP } = require( "express-graphql");
+const  productoController = require("./controllers/producto.graphql.controller.js")
+const  productoSchema = require( "./graphql/producto.schema.js");
 
-const RouterProducto = require ("./routes/producto.route.js")
+const RouterProducto = require ("./routes/producto.route.js") 
 const productoRouter = new RouterProducto()
 
 const configSession = require( "./session/configSession.js");
@@ -42,7 +46,21 @@ app.use(configSession);
 app.use(passport.initialize());
 app.use(passport.session());
 initPassport(passport);
-
+///////////////         GRAPHQL       //////////////
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: productoSchema,
+    rootValue: {
+      getProductos: productoController.getProductos,
+      getProducto: productoController.getProducto,
+      createProducto: productoController.createProducto,
+      updateProducto: productoController.updateProducto,
+      deleteProducto: productoController.deleteProducto,
+    },
+    graphiql: true,
+  })
+);
 //IF CLUSTER OR FORK?
 let expressServer = null
 

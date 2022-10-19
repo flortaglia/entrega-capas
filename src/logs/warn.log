@@ -889,3 +889,13 @@
 [2022-10-12T12:52:12.901Z] - warn : Método GET URL /asdasds inexistente
 [2022-10-12T12:53:14.662Z] - warn : Método GET URL /asdasds inexistente
 [2022-10-12T12:55:04.942Z] - warn : Método GET URL /asdasds inexistente
+[2022-10-19T14:30:01.634Z] - warn : Método GET URL /favicon.ico inexistente
+[2022-10-19T16:12:30.720Z] - warn : Método GET URL /k inexistente
+[2022-10-19T16:13:20.116Z] - warn : Método GET URL /www.google.com inexistente
+[2022-10-19T16:13:20.119Z] - warn : Método GET URL /k inexistente
+[2022-10-19T16:13:42.184Z] - warn : Método GET URL /k inexistente
+[2022-10-19T16:13:42.504Z] - warn : Método GET URL /www.google.com inexistente
+[2022-10-19T16:13:43.369Z] - warn : Método GET URL /www.google.com inexistente
+[2022-10-19T16:13:43.372Z] - warn : Método GET URL /k inexistente
+[2022-10-19T16:14:29.473Z] - warn : Método GET URL /k inexistente
+[2022-10-19T16:14:29.475Z] - warn : Método GET URL /www.google.com inexistente
